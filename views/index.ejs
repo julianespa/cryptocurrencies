@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>CryptoPrices</title>
+</head>
+<body>
+    <main>
+        <h1>Get the latest price of the top 3 Crypto Currencies!</h1>
+        <form action="/" method="post">
+            <button type="submit" name="symbol" value="BTC-USD">BITCOIN</button>
+            <button type="submit" name="symbol" value="ETH-USD">ETHEREUM</button>
+            <button type="submit" name="symbol" value="ADA-USD">ADA</button>
+        </form>
+        
+        <section style="width: 100%;">
+            <div class="card">
+                <% if (locals.data) { %>
+                    <%
+                     let dailyVar = 100 * ((data.last_trade_price - data.price_24h)/data.price_24h)
+                     %>
+                    <p>$ <%= data.last_trade_price %></p>
+                    <div>
+                        <span>24h Price: $<%= data.price_24h %></span>
+                        <span>Daily Var: <%= dailyVar.toFixed(2) %>%</span>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+        
+        <% if (locals.error) { %>
+            <p><%= error %></p>
+        <% } %>
+    </main>
+</body>
+</html>
